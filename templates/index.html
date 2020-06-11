@@ -1,47 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aplikasi Stok Barang</title>
-</head>
-<body>
-    <div class="nama-barang">
-        <h1 style="text-align: center;">List Barang</h1>
-        <table >
-            <tr>
-                <th>Nama Barang</th>
-                <th>Qty</th>
-                <th>Harga</th>
-                <th>Actions</th>
-            </tr>
-            {% for task in tasks %}
-            <tr>
-                <td>{{ task.content }}</td>
-                <td>{{ task.date_created.date() }}</td>
-                <td></td>
-                <td>
-                    <form action="/delete/<int:id>" method="POST">
-                        <input type="submit" value="Update">
-                        <br>
-                        <input type="submit" value="Delete">
-                    </form>
-                </td>
-            </tr>
-            {% endfor %}
-        </table>
-        </div>
-        <div class="form">
-            <form action="/" method="POST">
-                <input type="text" name="nama_barang" id="nama_barang" value="Masukan barang">
-                <br>
-                <input type="number" name="quantity" id="quantity">
-                <br>
-                <input type="number" name="harga" id="harga">
-                <br>
-                <br>
-                <input type="submit" value="Submit">
-            </form>
-        </div>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Aplikasi Stock Barang</title>
+{% endblock %}
+
+{% block body %}
+<h1>Aplikasi Stock Barang</h1>
+<form action="/">
+    <input type="text" name="nama_barang" id="nama_barang">
+    <input type="number" name="quantity" id="quantity">
+</form>
+{% endblock %}
