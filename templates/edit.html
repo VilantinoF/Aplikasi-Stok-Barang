@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Edit Barang</title>
+{% endblock %}
+
+{% block body %}
+<h1>Aplikasi Stock Barang</h1>
+<h3>Edit:</h3>
+<form action="/edit/{{post.id}}" method="POST">
+    Nama:
+    <input type="text" name="nama_barang" id="nama_barang" value="{{post.nama_barang}}">
+    <br>
+    Jumlah:
+    <input type="number" name="jumlah_barang" id="jumlah_barang" value="{{post.jumlah_barang}}">
+    <br>
+    Harga:
+    <input type="number" name="harga_barang" id="harga_barang" value="{{post.harga_barang}}">
+    <br>
+    <br>
+    <input type="submit" value="Submit">
+</form>
+{% endblock %}

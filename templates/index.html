@@ -6,8 +6,45 @@
 
 {% block body %}
 <h1>Aplikasi Stock Barang</h1>
-<form action="/">
+<h3>Masukkan barang anda:</h3>
+<form action="/" method="POST">
+    Nama:
     <input type="text" name="nama_barang" id="nama_barang">
-    <input type="number" name="quantity" id="quantity">
+    <br>
+    Jumlah:
+    <input type="number" name="jumlah_barang" id="jumlah_barang">
+    <br>
+    Harga:
+    <input type="number" name="harga_barang" id="harga_barang">
+    <br>
+    <br>
+    <input type="submit" value="Submit">
 </form>
+<br>
+<hr>
+<table>
+    <tr>
+        <th>No.</th>
+        <th>Nama Barang</th>
+        <th>Jumlah</th>
+        <th>Harga</th>
+        <th>Tanggal</th>
+        <th></th>
+    </tr>
+    {% for post in posts %}
+    <tr>
+        <td>{{ post.id }}</td>
+        <td>{{ post.nama_barang }}</td>
+        <td>{{ post.jumlah_barang }}</td>
+        <td>{{ post.harga_barang }}</td>
+        <td>{{ post.tanggal_pembuatan }}</td>
+        <td>
+            <a href="/edit/{{ post.id }}">Edit</a>
+            <br>
+            <a href="/delete/{{ post.id }}">Delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
 {% endblock %}
