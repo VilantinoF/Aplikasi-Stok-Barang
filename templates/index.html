@@ -6,45 +6,58 @@
 
 {% block body %}
 <h1>Aplikasi Stock Barang</h1>
+<br>
 <h3>Masukkan barang anda:</h3>
 <form action="/" method="POST">
-    Nama:
-    <input type="text" name="nama_barang" id="nama_barang">
-    <br>
-    Jumlah:
-    <input type="number" name="jumlah_barang" id="jumlah_barang">
-    <br>
-    Harga:
-    <input type="number" name="harga_barang" id="harga_barang">
-    <br>
-    <br>
-    <input type="submit" value="Submit">
+    <div class="form-group">
+        <label for="nama_barang">Nama :</label>
+        <input type="text" class="form-control" name="nama_barang" id="nama_barang" aria-describedby="nama_barang"
+            placeholder="Masukkan Nama Barang">
+    </div>
+    <div class="form-group">
+        <label for="jumlah_barang">Jumlah :</label>
+        <input type="number" class="form-control" name="jumlah_barang" id="jumlah_barang" aria-describedby="jumlah_barang"
+            placeholder="Masukkan Jumlah Barang">
+    </div>
+    <div class="form-group">
+        <label for="harga_barang">Harga :</label>
+        <input type="number" class="form-control" name="harga_barang" id="harga_barang" aria-describedby="harga_barang"
+            placeholder="Masukkan Harga Barang">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 <br>
-<hr>
-<table>
-    <tr>
-        <th>No.</th>
-        <th>Nama Barang</th>
-        <th>Jumlah</th>
-        <th>Harga</th>
-        <th>Tanggal</th>
-        <th></th>
-    </tr>
-    {% for post in posts %}
-    <tr>
-        <td>{{ post.id }}</td>
-        <td>{{ post.nama_barang }}</td>
-        <td>{{ post.jumlah_barang }}</td>
-        <td>{{ post.harga_barang }}</td>
-        <td>{{ post.tanggal_pembuatan }}</td>
-        <td>
-            <a href="/edit/{{ post.id }}">Edit</a>
-            <br>
-            <a href="/delete/{{ post.id }}">Delete</a>
-        </td>
-    </tr>
-    {% endfor %}
+<br>
+<h3>List Barang</h3>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">No.</th>
+            <th scope="col">Nama Barang</th>
+            <th scope="col">Jumlah</th>
+            <th scope="col">Harga</th>
+            <th scope="col">Jumlah</th>
+            <th scope="col">Tanggal</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for post in posts %}
+        <tr>
+            <th scope="row">{{ post.id }}</th>
+            <td>{{ post.nama_barang }}</td>
+            <td>{{ post.jumlah_barang }}</td>
+            <td>{{ post.harga_barang }}</td>
+            <td>{{ post.jumlah_total }}</td>
+            <td>{{ post.tanggal_pembuatan }}</td>
+            <td>
+                <a class="btn btn-secondary" href="/edit/{{ post.id }}">Edit</a>
+                <br>
+                <a class="btn btn-danger" href="/delete/{{ post.id }}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
 </table>
 
 {% endblock %}

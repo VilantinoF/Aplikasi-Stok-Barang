@@ -7,10 +7,12 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data_barang.db'
 db = SQLAlchemy(app)
 
 class Barang(db.Model):
+
     id = db.Column(db.Integer, primary_key=True)
     nama_barang = db.Column(db.String(100), nullable=False)
     jumlah_barang = db.Column(db.Integer, nullable=False, default=1)
-    harga_barang = db.Column(db.String, nullable=False)
+    harga_barang = db.Column(db.Integer, nullable=False)
+    jumlah_total = db.Column(db.Integer, nullable=False)
     tanggal_pembuatan = db.Column(db.DateTime, default=datetime.utcnow)
 
     def __repr__(self):
@@ -23,12 +25,13 @@ def index():
         input_barang = request.form['nama_barang']
         input_jumlah = request.form['jumlah_barang']
         input_harga = request.form['harga_barang']
-        post = Barang(nama_barang=input_barang, jumlah_barang=input_jumlah, harga_barang=input_harga)
+        jml_total = int(input_harga)*int(input_jumlah)
+        post = Barang(nama_barang=input_barang, jumlah_barang=input_jumlah, harga_barang=input_harga, jumlah_total=jml_total)
         db.session.add(post)
         db.session.commit()
         return redirect('/')
     else:
-        posts = Barang.query.order_by(Barang.id).all()
+        posts = Barang.query.(Barang.tanggal_pembuatan).all()
         return render_template('index.html', posts=posts)
 
 @app.route('/delete/<int:id>')
@@ -53,4 +56,4 @@ def update(id):
         return render_template('edit.html', post=post)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='192.168.1.4')
