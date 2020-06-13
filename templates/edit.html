@@ -8,16 +8,31 @@
 <h1>Aplikasi Stock Barang</h1>
 <h3>Edit:</h3>
 <form action="/edit/{{post.id}}" method="POST">
-    Nama:
-    <input type="text" name="nama_barang" id="nama_barang" value="{{post.nama_barang}}">
-    <br>
-    Jumlah:
-    <input type="number" name="jumlah_barang" id="jumlah_barang" value="{{post.jumlah_barang}}">
-    <br>
-    Harga:
-    <input type="number" name="harga_barang" id="harga_barang" value="{{post.harga_barang}}">
-    <br>
-    <br>
-    <input type="submit" value="Submit">
+    <div class="form-group">
+        <label for="nama_barang">Nama :</label>
+        <input type="text" class="form-control" name="nama_barang" id="nama_barang" aria-describedby="nama_barang"
+            placeholder="Masukkan Nama Barang" value="{{ post.nama_barang }}">
+    </div>
+    <div class="form-group">
+        <label for="jumlah_barang">Jumlah :</label>
+        <input type="number" class="form-control" name="jumlah_barang" id="jumlah_barang"
+            aria-describedby="jumlah_barang" placeholder="Masukkan Jumlah Barang" value="{{ post.jumlah_barang }}">
+    </div>
+    <div class="form-group">
+        <label for="harga_beli_barang">Harga Beli :</label>
+        <input type="number" class="form-control" name="harga_beli_barang" id="harga_beli_barang"
+            aria-describedby="harga_beli_barang" placeholder="Masukkan Harga Beli Barang" value="{{ post.harga_beli_barang }}">
+    </div>
+    <div class="form-group">
+        <label for="harga_jual_barang">Harga Jual :</label>
+        <input type="number" class="form-control" name="harga_jual_barang" id="harga_jual_barang"
+            aria-describedby="harga_jual_barang" placeholder="Masukkan Harga Jual Barang" value="{{ post.harga_jual_barang }}">
+    </div>
+    <div class="form-group">
+        <label for="diskon">Diskon :</label>
+        <input type="number" class="form-control" name="diskon" id="diskon" aria-describedby="diskon"
+            placeholder="Masukkan Diskon" value="{{ post.diskon }}">
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
 </form>
 {% endblock %}

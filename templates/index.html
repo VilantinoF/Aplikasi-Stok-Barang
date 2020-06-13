@@ -20,9 +20,19 @@
             placeholder="Masukkan Jumlah Barang">
     </div>
     <div class="form-group">
-        <label for="harga_barang">Harga :</label>
-        <input type="number" class="form-control" name="harga_barang" id="harga_barang" aria-describedby="harga_barang"
-            placeholder="Masukkan Harga Barang">
+        <label for="harga_beli_barang">Harga Beli :</label>
+        <input type="number" class="form-control" name="harga_beli_barang" id="harga_beli_barang" aria-describedby="harga_beli_barang"
+            placeholder="Masukkan Harga Beli Barang">
+    </div>
+    <div class="form-group">
+        <label for="harga_jual_barang">Harga Jual :</label>
+        <input type="number" class="form-control" name="harga_jual_barang" id="harga_jual_barang" aria-describedby="harga_jual_barang"
+            placeholder="Masukkan Harga Jual Barang">
+    </div>
+    <div class="form-group">
+        <label for="diskon">Diskon :</label>
+        <input type="number" class="form-control" name="diskon" id="diskon" aria-describedby="diskon"
+            placeholder="Masukkan Diskon">
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
@@ -35,7 +45,9 @@
             <th scope="col">No.</th>
             <th scope="col">Nama Barang</th>
             <th scope="col">Jumlah</th>
-            <th scope="col">Harga</th>
+            <th scope="col">Harga Beli</th>
+            <th scope="col">Harga Jual</th>
+            <th scope="col">Diskon</th>
             <th scope="col">Jumlah</th>
             <th scope="col">Tanggal</th>
             <th></th>
@@ -47,11 +59,14 @@
             <th scope="row">{{ post.id }}</th>
             <td>{{ post.nama_barang }}</td>
             <td>{{ post.jumlah_barang }}</td>
-            <td>{{ post.harga_barang }}</td>
-            <td>{{ post.jumlah_total }}</td>
+            <td>{{ post.harga_beli_barang }}</td>
+            <td>{{ post.harga_jual_barang }}</td>
+            <td>{{ post.diskon }}</td>
+            <td>{{ jml_total }}</td>
             <td>{{ post.tanggal_pembuatan }}</td>
             <td>
                 <a class="btn btn-secondary" href="/edit/{{ post.id }}">Edit</a>
+                <br>
                 <br>
                 <a class="btn btn-danger" href="/delete/{{ post.id }}">Delete</a>
             </td>
