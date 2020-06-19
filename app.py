@@ -60,6 +60,7 @@ def update(id):
         post.harga_beli_barang = request.form['harga_beli_barang']
         post.harga_jual_barang = request.form['harga_jual_barang']
         post.diskon = request.form['diskon']
+        post.jumlah_total = (int(post.jumlah_barang) * int(post.harga_beli_barang)) * (1.0-(int(post.diskon)/100))
         db.session.commit()
         return redirect('/')
     else:
