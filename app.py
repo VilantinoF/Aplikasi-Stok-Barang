@@ -13,7 +13,8 @@ class Barang(db.Model):
     jumlah_barang = db.Column(db.Integer, nullable=False, default=1)
     harga_beli_barang = db.Column(db.Integer, nullable=False)
     harga_jual_barang = db.Column(db.Integer, nullable=False)
-    diskon = db.Column(db.Integer,nullable=False)
+    diskon = db.Column(db.Integer, nullable=False)
+    jumlah_total = db.Column(db.Integer, nullable=False)
     tanggal_pembuatan = db.Column(db.DateTime, default=datetime.utcnow)
 
     def __repr__(self):
@@ -31,17 +32,15 @@ def index():
         input_harga_beli = request.form['harga_beli_barang']
         input_harga_jual = request.form['harga_jual_barang']
         input_diskon = request.form['diskon']
-        
-        post = Barang(nama_barang=input_barang, jumlah_barang=input_jumlah, harga_beli_barang=input_harga_beli, harga_jual_barang=input_harga_jual, diskon=input_diskon)
+        jml_barang = (int(input_jumlah) * int(input_harga_beli)) * (1.0-(int(input_diskon)/100))
+        print(jml_barang)
+        post = Barang(nama_barang=input_barang, jumlah_barang=input_jumlah, harga_beli_barang=input_harga_beli, harga_jual_barang=input_harga_jual, diskon=input_diskon, jumlah_total=jml_barang)
         db.session.add(post)
         db.session.commit()
         return redirect('/')
     else:
         posts = Barang.query.order_by(Barang.tanggal_pembuatan).all()
-        for i in posts:
-            jml_total = i.harga_beli_barang * i.jumlah_barang
-        print(jml_total)
-        return render_template('index.html', posts=posts, jml_total=jml_total)
+        return render_template('index.html', posts=posts)
 
 @app.route('/delete/<int:id>')
 def delete(id):
