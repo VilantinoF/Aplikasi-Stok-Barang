@@ -10,7 +10,7 @@ class Barang(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     nama_barang = db.Column(db.String(100), nullable=False)
-    jumlah_barang = db.Column(db.Integer, nullable=False, default=1)
+    jumlah_barang = db.Column(db.Integer, nullable=False)
     harga_beli_barang = db.Column(db.Integer, nullable=False)
     harga_jual_barang = db.Column(db.Integer, nullable=False)
     diskon = db.Column(db.Integer, nullable=False)
@@ -33,7 +33,6 @@ def index():
         input_harga_jual = request.form['harga_jual_barang']
         input_diskon = request.form['diskon']
         jml_barang = (int(input_jumlah) * int(input_harga_beli)) * (1.0-(int(input_diskon)/100))
-        print(jml_barang)
         post = Barang(nama_barang=input_barang, jumlah_barang=input_jumlah, harga_beli_barang=input_harga_beli, harga_jual_barang=input_harga_jual, diskon=input_diskon, jumlah_total=jml_barang)
         db.session.add(post)
         db.session.commit()

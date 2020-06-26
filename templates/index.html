@@ -59,10 +59,10 @@
             <th scope="row">{{ post.id }}</th>
             <td>{{ post.nama_barang }}</td>
             <td>{{ post.jumlah_barang }}</td>
-            <td>Rp{{ post.harga_beli_barang }}</td>
-            <td>Rp{{ post.harga_jual_barang }}</td>
-            <td>{{ post.diskon }}%</td>
-            <td>Rp{{ post.jumlah_total }}</td>
+            <td>{{ "Rp{:,.2f}".format(post.harga_beli_barang) }}</td>
+            <td>{{ "Rp{:,.2f}".format(post.harga_jual_barang) }}</td>
+            <td>{{ "{:,.1f}".format(post.diskon) }}%</td>
+            <td>{{ "Rp{:,.2f}".format(post.jumlah_total) }}</td>
             <td>{{ post.tanggal_pembuatan }}</td>
             <td>
                 <a class="btn btn-secondary" href="/edit/{{ post.id }}">Edit</a>
