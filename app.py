@@ -20,9 +20,19 @@ class Barang(db.Model):
     def __repr__(self):
         return 'Barang ' + str(self.nama_barang)
 
+class UserAccount(db.Model):
+
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(20), nullable=False)
+    uName = db.Column(db.String(14), nullable=False)
+    pNumber = db.Column(db.Integer, nullable=False)
+    password = db.Column(db.Integer, nullable=False)
+
+    def __repr__(self):
+        return 'Email :' + str(self.email)
+    
 db.create_all()
 db.session.commit()
-
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -64,6 +74,38 @@ def update(id):
         return redirect('/')
     else:
         return render_template('edit.html', post=post)
+
+@app.route('/login-page', methods=['GET', 'POST'])
+def loginPage():
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+        for account in UserAccount.query.all():
+            print(account.email, account.password)
+            try:
+                if email == account.email and password == account.password:
+                    print('LogIn Success')
+                    return redirect('/')
+            except:
+                return render_template('/')
+    else:
+        return render_template('login.html')
+
+@app.route('/signup-page', methods=['GET', 'POST'])
+def signup():
+    if request.method == 'POST':
+        input_email = request.form['email']
+        input_uName = request.form['username']
+        input_pNumber = request.form['phone-number']
+        input_password = request.form['password']
+        post = UserAccount(email=input_email, uName=input_uName, pNumber=input_pNumber, password=input_password)
+        db.session.add(post)
+        db.session.commit()
+        return redirect ('/')
+    else:
+        return render_template('signup.html')
+        
+
 
 if __name__ == '__main__':
     app.run(debug=True, host='192.168.1.4')
