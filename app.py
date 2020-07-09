@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+from flask_login import LoginManager
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
@@ -29,7 +30,7 @@ class UserAccount(db.Model):
     password = db.Column(db.Integer, nullable=False)
 
     def __repr__(self):
-        return 'Email :' + str(self.email)
+        return 'ID :' + str(self.id)
     
 db.create_all()
 db.session.commit()
@@ -77,19 +78,17 @@ def update(id):
 
 @app.route('/login-page', methods=['GET', 'POST'])
 def loginPage():
+    error = None
     if request.method == 'POST':
-        email = request.form['email']
-        password = request.form['password']
         for account in UserAccount.query.all():
-            print(account.email, account.password)
-            try:
-                if email == account.email and password == account.password:
-                    print('LogIn Success')
-                    return redirect('/')
-            except:
-                return render_template('/')
-    else:
-        return render_template('login.html')
+            print(account)
+            if request.form['email'] != account.email or request.form['password'] != account.password:
+                print(request.form['email'], request.form['password'])
+                error = "You're email and password incorrect"
+            else:
+                print(request.form['email'], request.form['password'])
+                return redirect('/')
+    return render_template('login.html', error=error)
 
 @app.route('/signup-page', methods=['GET', 'POST'])
 def signup():
