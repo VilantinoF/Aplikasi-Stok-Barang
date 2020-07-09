@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
@@ -82,14 +82,11 @@ def loginPage():
         password = request.form['password']
         for account in UserAccount.query.all():
             print(account.email, account.password)
-            try:
-                if email == account.email and password == account.password:
-                    print('LogIn Success')
-                    return redirect('/')
-            except:
-                return render_template('/')
-    else:
-        return render_template('login.html')
+            if email != account.email or password != account.password:
+                print('Wrong Pass')
+                return redirect(url_for('index'))
+            else:
+                return render_template('login.html')
 
 @app.route('/signup-page', methods=['GET', 'POST'])
 def signup():
@@ -108,4 +105,4 @@ def signup():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host='192.168.1.4')
+    app.run(debug=True, host='192.168.1.5')
